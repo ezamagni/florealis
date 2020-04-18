@@ -1,0 +1,13 @@
+# platform :ios, '9.0'
+
+target 'FitoMap' do
+  use_frameworks!
+
+  pod 'Mapbox-iOS-SDK', '~> 5.6'
+
+  target 'FitoMapTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

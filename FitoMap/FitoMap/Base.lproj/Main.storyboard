@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="FitoMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BCB-IB-lDl" customClass="MGLMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JlA-v5-47y">
+                                        <rect key="frame" x="307" y="12" width="56" height="56"/>
+                                        <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" image="btn_track"/>
+                                        <connections>
+                                            <action selector="onButtonTrackTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rpy-My-5vU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="JlA-v5-47y" secondAttribute="trailing" constant="12" id="5cb-KG-xv0"/>
+                                    <constraint firstItem="JlA-v5-47y" firstAttribute="top" secondItem="BCB-IB-lDl" secondAttribute="topMargin" constant="4" id="I8k-Nb-waD"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="styleURL__" value="mapbox://styles/ezamagni/ck5aygdwl2qvk1cofsnbfp6yr"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="zoomLevel">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsRotating" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="allowsTilting" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showsScale" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="latitude">
+                                        <real key="value" value="41.902290000000001"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="longitude">
+                                        <real key="value" value="12.45336"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eQc-sd-oMz" customClass="LocationPanelView" customModule="FitoMap" customModuleProvider="target">
+                                <rect key="frame" x="90" y="30" width="195" height="88.5"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="eQc-sd-oMz" secondAttribute="height" multiplier="2.2" id="Oeu-gn-pRi"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="eQc-sd-oMz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1ze-Ot-KZB"/>
+                            <constraint firstItem="eQc-sd-oMz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="80e-u7-sV7"/>
+                            <constraint firstItem="BCB-IB-lDl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="EB7-c6-zE9"/>
+                            <constraint firstAttribute="trailing" secondItem="BCB-IB-lDl" secondAttribute="trailing" id="IuA-UB-tXt"/>
+                            <constraint firstItem="eQc-sd-oMz" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.52" id="MVh-g0-0z8"/>
+                            <constraint firstItem="BCB-IB-lDl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="RHf-c2-HJw"/>
+                            <constraint firstAttribute="bottom" secondItem="BCB-IB-lDl" secondAttribute="bottom" id="ujz-FL-ruZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnTrack" destination="JlA-v5-47y" id="xed-Iv-M4x"/>
+                        <outlet property="mapView" destination="BCB-IB-lDl" id="h4c-Yv-bpc"/>
+                        <outlet property="panelView" destination="eQc-sd-oMz" id="EZF-5I-VTl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138.40000000000001" y="126.38680659670166"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btn_track" width="40" height="40"/>
+    </resources>
+</document>

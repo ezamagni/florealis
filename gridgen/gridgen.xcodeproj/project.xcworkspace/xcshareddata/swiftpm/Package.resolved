@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CodableJSON",
+        "repositoryURL": "https://github.com/guykogus/CodableJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "d5861995c2979ae4b393a946a30af73a0e7fce73",
+          "version": "1.2.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

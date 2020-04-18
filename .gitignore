@@ -1,0 +1,80 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Android related
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+*.apk
+*.ap_
+*.dex
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+
+# Gradle files
+.gradle/
+build/
+
+# iOS/XCode related
+**/*.mode1v3
+**/*.mode2v3
+**/*.moved-aside
+**/*.pbxuser
+**/*.perspectivev3
+**/*sync/
+**/.sconsign.dblite
+**/.tags*
+**/.vagrant/
+**/DerivedData/
+**/Icon?
+**/Pods/
+**/.symlinks/
+**/profile
+**/xcuserdata
+**/.generated/
+**/Flutter/App.framework
+**/Flutter/Flutter.framework
+**/Flutter/Generated.xcconfig
+**/Flutter/app.flx
+**/Flutter/app.zip
+**/Flutter/flutter_assets/
+**/ServiceDefinitions.json
+**/Runner/GeneratedPluginRegistrant.*
+
+# Exceptions to above rules.
+!**/default.mode1v3
+!**/default.mode2v3
+!**/default.pbxuser
+!**/default.perspectivev3
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
