@@ -84,4 +84,3 @@ class _LocatorPageState extends State<LocatorPage>
     );
   }
 }
-
