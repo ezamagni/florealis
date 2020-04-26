@@ -11,18 +11,18 @@ void main() {
   });
 
   test('CFCE conversion', () {
-    expect(CFCEPoint.from(CFCEPoint.origin), CFCEPoint(0, 0, [1, 1]));
+    expect(CfcePoint.from(CfcePoint.origin), CfcePoint(0, 0, [1, 1]));
     // precision 1 tests
-    expect(CFCEPoint.from(GPSPoint(44.16388, 12.22500), precision: 1), CFCEPoint(118, 39, [1]));
-    expect(CFCEPoint.from(GPSPoint(44.18056, 12.30833), precision: 1), CFCEPoint(118, 39, [2]));
-    expect(CFCEPoint.from(GPSPoint(44.11667, 12.18333), precision: 1), CFCEPoint(118, 39, [3]));
-    expect(CFCEPoint.from(GPSPoint(44.14167, 12.25833), precision: 1), CFCEPoint(118, 39, [4]));
+    expect(CfcePoint.from(GpsPoint(44.16388, 12.22500), precision: 1), CfcePoint(118, 39, [1]));
+    expect(CfcePoint.from(GpsPoint(44.18056, 12.30833), precision: 1), CfcePoint(118, 39, [2]));
+    expect(CfcePoint.from(GpsPoint(44.11667, 12.18333), precision: 1), CfcePoint(118, 39, [3]));
+    expect(CfcePoint.from(GpsPoint(44.14167, 12.25833), precision: 1), CfcePoint(118, 39, [4]));
 
     // precision 2 tests
-    expect(CFCEPoint.from(GPSPoint(44.14167, 12.25833), precision: 2), CFCEPoint(118, 39, [4, 1]));
-    expect(CFCEPoint.from(GPSPoint(44.18056, 12.30833), precision: 2), CFCEPoint(118, 39, [2, 2]));
-    expect(CFCEPoint.from(GPSPoint(44.11667, 12.18333), precision: 2), CFCEPoint(118, 39, [3, 3]));
-    expect(CFCEPoint.from(GPSPoint(44.16388, 12.22500), precision: 2), CFCEPoint(118, 39, [1, 4]));
+    expect(CfcePoint.from(GpsPoint(44.14167, 12.25833), precision: 2), CfcePoint(118, 39, [4, 1]));
+    expect(CfcePoint.from(GpsPoint(44.18056, 12.30833), precision: 2), CfcePoint(118, 39, [2, 2]));
+    expect(CfcePoint.from(GpsPoint(44.11667, 12.18333), precision: 2), CfcePoint(118, 39, [3, 3]));
+    expect(CfcePoint.from(GpsPoint(44.16388, 12.22500), precision: 2), CfcePoint(118, 39, [1, 4]));
   });
 }
 

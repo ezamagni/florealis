@@ -57,21 +57,21 @@ class _LocatorPageState extends State<LocatorPage>
               } else if (locationState is FetchingLocationState) {
                 return CircularProgressIndicator();
               } else if (locationState is KnownLocationState) {
-                final latDMS = Sexagesimal.from(locationState.position.lat);
-                final lonDMS = Sexagesimal.from(locationState.position.lon);
-                final cfcePosition = CFCEPoint.from(locationState.position);
+                final latDMS = Sexagesimal.from(locationState.location.lat);
+                final lonDMS = Sexagesimal.from(locationState.location.lon);
+                final cfcePosition = CfcePoint.from(locationState.location);
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("${cfcePosition.toString()}", 
-                      style: Theme.of(context).textTheme.display2,
+                      style: Theme.of(context).textTheme.headline3,
                     ),
                     Padding(padding: EdgeInsets.all(8),),
                     Text("${latDMS.toString()}  ${lonDMS.toString()}",
-                      style: Theme.of(context).textTheme.headline,
+                      style: Theme.of(context).textTheme.headline5,
                     ),
-                    Text("${locationState.position.toString()}"),
+                    Text("${locationState.location.toString()}"),
                   ],
                 );
               } else {

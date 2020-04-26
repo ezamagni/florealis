@@ -8,7 +8,6 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
 
   final _locator = Geolocator();
 
-
   @override
   LocationState get initialState => UnknownLocationState();
 
@@ -28,7 +27,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         locationPermissionLevel: GeolocationPermission.locationWhenInUse
       );
       yield KnownLocationState(
-        GPSPoint(position.latitude, position.longitude)
+        GpsPoint(position.latitude, position.longitude)
       );
       
     } on Exception catch (err) {

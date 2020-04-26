@@ -6,7 +6,7 @@ import 'dart:math';
 // see https://en.wikipedia.org/wiki/ED50
 // see http://www.floravenagesso.it/romagna/Cartografia.htm
 
-class CFCEPoint extends Equatable {
+class CfcePoint extends Equatable {
 
   // grid
   final int lat;
@@ -15,16 +15,16 @@ class CFCEPoint extends Equatable {
   // quad
   final List<int> quads;
 
-  const CFCEPoint(this.lat, this.lon, [this.quads = const []])
+  const CfcePoint(this.lat, this.lon, [this.quads = const []])
   : assert(lat != null && lon != null && quads != null);
 
   @override
   List<Object> get props => [lat, lon, quads];
 
   @visibleForTesting
-  static const origin = GPSPoint(56, 17/3);
+  static const origin = GpsPoint(56, 17/3);
 
-  factory CFCEPoint.from(GPSPoint gpsPoint, {int precision = 2}) {
+  factory CfcePoint.from(GpsPoint gpsPoint, {int precision = 2}) {
     assert(precision >= 0);
     
     // latitude extension of the CFCE grid expressed in decimals
@@ -32,7 +32,7 @@ class CFCEPoint extends Equatable {
     // longitude extension of the CFCE grid expressed in decimals
     const gridLonDec = 1/6; // 10'
 
-    final refDec = GPSPoint(
+    final refDec = GpsPoint(
       origin.lat - gpsPoint.lat, 
       gpsPoint.lon - origin.lon
     );
@@ -43,7 +43,7 @@ class CFCEPoint extends Equatable {
       .generate(precision, (i) => i + 1)
       .map((i) => _quadrantOf(latDec, lonDec, i))
       .toList();
-    return CFCEPoint(latDec.floor(), lonDec.floor(), quads);
+    return CfcePoint(latDec.floor(), lonDec.floor(), quads);
   }
 
   static int _quadrantOf(double lat, double lon, int level) {

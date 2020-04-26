@@ -15,7 +15,7 @@ class ErrorLocationState extends LocationState {
 }
 
 class KnownLocationState extends LocationState {
-  final GPSPoint position;
+  final GpsPoint location;
 
-  KnownLocationState(this.position);
+  KnownLocationState(this.location);
 }

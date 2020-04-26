@@ -1,4 +1,4 @@
-import 'package:florealis/ui/LocatorPage.dart';
+import 'package:florealis/ui/map_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.green,
       ),
-      home: LocatorPage(),
+      home: MapPage(),
     );
   }
 }
