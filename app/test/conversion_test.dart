@@ -12,6 +12,9 @@ void main() {
 
   test('CFCE conversion', () {
     expect(CfcePoint.from(CfcePoint.origin), CfcePoint(0, 0, [1, 1]));
+
+    print(CfcePoint.from(GpsPoint(44.01698, 12.41630)).toString());
+
     // precision 1 tests
     expect(CfcePoint.from(GpsPoint(44.16388, 12.22500), precision: 1), CfcePoint(118, 39, [1]));
     expect(CfcePoint.from(GpsPoint(44.18056, 12.30833), precision: 1), CfcePoint(118, 39, [2]));

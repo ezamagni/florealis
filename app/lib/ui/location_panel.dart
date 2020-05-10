@@ -20,10 +20,10 @@ class LocationPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(8),
+        color: Theme.of(context).colorScheme.background.withOpacity(0.78),
+        borderRadius: BorderRadius.circular(9),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -34,12 +34,14 @@ class LocationPanel extends StatelessWidget {
             children: <Widget>[
               Text(
                 cfceLocation?.toString() ?? '-',
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headline6,
               ),
               Container(height: 5),
               Text(
                 gpsLocation?.toString() ?? '-',
-                style: Theme.of(context).textTheme.bodyText1,
+                style: Theme.of(context).textTheme.caption.apply(
+                  fontFamily: 'UbuntuMono',
+                ),
               )
             ],
           ),

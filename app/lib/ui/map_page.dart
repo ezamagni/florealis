@@ -1,13 +1,13 @@
-import 'package:florealis/blocs/location/bloc.dart';
-import 'package:florealis/globals.dart';
 import 'package:florealis/models/gps_point.dart';
+import 'package:florealis/services/locator.dart';
 import 'package:florealis/ui/location_panel.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:florealis/extensions/mapbox_extensions.dart';
+import 'package:flutter/material.dart';
+import 'package:mapbox_gl/mapbox_gl.dart';
 
 class MapPage extends StatefulWidget {
+  static const STYLE_URL = 'mapbox://styles/ezamagni/ck5aygdwl2qvk1cofsnbfp6yr';
+
   @override
   _MapPageState createState() => _MapPageState();
 }
@@ -18,7 +18,7 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
     zoom: 4.8,
   );
 
-  final locationBloc = LocationBloc();
+  final _locator = Locator();
   MapboxMapController mapController;
   GpsPoint userLocation;
 
@@ -28,17 +28,18 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _locator.positionStream.listen(_onPosition);
   }
 
   void _onMapCreated(MapboxMapController controller) {
     mapController = controller;
-    locationBloc.listen(_onLocationState);
-    locationBloc.add(GetLocationEvent());
     mapController.addListener(_onMapChanged);
+    _locator.start();
   }
 
   @override
   void dispose() {
+    _locator.stop();
     mapController.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -50,59 +51,57 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
     print(mapController);
   }
 
-  void _onLocationState(LocationState state) {
-    if (state is KnownLocationState) {
-      if (isTrackingUser) {
-        mapController?.animateCamera(
-          CameraUpdate.newLatLngZoom(state.location.latlng, 13.4),
-        );
-      }
+  void _onPosition(GpsPoint position) {
+    if (isTrackingUser) {
+      mapController?.animateCamera(
+        CameraUpdate.newLatLngZoom(position.latlng, 13.4),
+      );
     }
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      locationBloc.add(GetLocationEvent());
+      _locator.start();
+    } else {
+      _locator.stop();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LocationBloc>.value(
-      value: locationBloc,
-      child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            MapboxMap(
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: _initialCameraPosition,
-              styleString: Globals.MAPBOX_STYLEURL,
-              rotateGesturesEnabled: false,
-              tiltGesturesEnabled: false,
-              myLocationEnabled: true,
-              myLocationTrackingMode: isTrackingUser
-                  ? MyLocationTrackingMode.TrackingGPS
-                  : MyLocationTrackingMode.Tracking,
-              myLocationRenderMode: MyLocationRenderMode.NORMAL,
-            ),
-            BlocBuilder<LocationBloc, LocationState>(
-              builder: (context, state) {
-                if (state is KnownLocationState) {
-                  return Align(
-                    alignment: Alignment.topCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 24.0),
-                      child: LocationPanel.location(state.location),
-                    ),
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          MapboxMap(
+            onMapCreated: _onMapCreated,
+            initialCameraPosition: _initialCameraPosition,
+            styleString: MapPage.STYLE_URL,
+            rotateGesturesEnabled: false,
+            tiltGesturesEnabled: false,
+            myLocationEnabled: true,
+            myLocationTrackingMode: isTrackingUser
+                ? MyLocationTrackingMode.TrackingGPS
+                : MyLocationTrackingMode.Tracking,
+            myLocationRenderMode: MyLocationRenderMode.NORMAL,
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: StreamBuilder<GpsPoint>(
+              stream: _locator.positionStream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: LocationPanel.location(snapshot.data),
                   );
                 } else {
                   return Container();
                 }
               },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

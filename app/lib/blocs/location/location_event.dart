@@ -4,3 +4,7 @@ import 'package:meta/meta.dart';
 abstract class LocationEvent {}
 
 class GetLocationEvent extends LocationEvent {}
+
+class StartTrackPositionEvent extends LocationEvent {}
+
+class StopTrackPositionEvent extends LocationEvent {}

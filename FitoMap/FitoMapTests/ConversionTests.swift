@@ -21,6 +21,8 @@ class ConversionTests: XCTestCase {
     func testCfceConversion() {
         XCTAssertEqual(CfceCoordinate(CfceCoordinate.Grid.origin), CfceCoordinate(0, 0, [1, 1]))
         
+        print(CfceCoordinate(CLLocationCoordinate2D(latitude: 44.01774, longitude: 12.41643)).toString())
+        
         // precision 1 tests
         XCTAssertEqual(CfceCoordinate(CLLocationCoordinate2D(latitude: 44.16388, longitude: 12.22500), precision: 1), CfceCoordinate(118, 39, [1]))
         XCTAssertEqual(CfceCoordinate(CLLocationCoordinate2D(latitude: 44.18056, longitude: 12.30833), precision: 1), CfceCoordinate(118, 39, [2]))
