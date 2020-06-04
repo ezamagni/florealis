@@ -65,11 +65,11 @@ class _LocatorPageState extends State<LocatorPage>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("${cfcePosition.toString()}", 
-                      style: Theme.of(context).textTheme.headline,
+                      style: Theme.of(context).textTheme.headline5,
                     ),
                     Padding(padding: EdgeInsets.all(8),),
                     Text("${latDMS.toString()}  ${lonDMS.toString()}",
-                      style: Theme.of(context).textTheme.headline,
+                      style: Theme.of(context).textTheme.headline5,
                     ),
                     Text("${locationState.location.toString()}"),
                   ],
