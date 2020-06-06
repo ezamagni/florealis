@@ -1,7 +1,6 @@
 import 'package:florealis/models/gps_point.dart';
 import 'package:florealis/services/locator.dart';
 import 'package:florealis/ui/location_panel.dart';
-import 'package:florealis/extensions/mapbox_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
@@ -28,12 +27,12 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    _locator.positionStream.listen(_onPosition);
   }
 
   void _onMapCreated(MapboxMapController controller) {
-    mapController = controller;
-    mapController.addListener(_onMapChanged);
+    setState(() {
+      mapController = controller;
+    });
     _locator.start();
   }
 
@@ -43,20 +42,6 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
     mapController.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
-  }
-
-  void _onMapChanged() {
-    // setState(() {
-    // });
-    print(mapController);
-  }
-
-  void _onPosition(GpsPoint position) {
-    if (isTrackingUser) {
-      mapController?.animateCamera(
-        CameraUpdate.newLatLngZoom(position.latlng, 13.4),
-      );
-    }
   }
 
   @override
@@ -80,9 +65,19 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
             rotateGesturesEnabled: false,
             tiltGesturesEnabled: false,
             myLocationEnabled: true,
-            myLocationTrackingMode: isTrackingUser
-                ? MyLocationTrackingMode.TrackingGPS
-                : MyLocationTrackingMode.Tracking,
+            onMapClick: (_, __) {
+              setState(() {
+                isTrackingUser = !isTrackingUser;
+              });
+            },
+            onCameraTrackingChanged: (trackingMode) {
+              setState(() {
+                isTrackingUser = trackingMode == MyLocationTrackingMode.Tracking;
+              });
+            },
+            myLocationTrackingMode: (isTrackingUser && mapController != null)
+                ? MyLocationTrackingMode.Tracking
+                : MyLocationTrackingMode.None,
             myLocationRenderMode: MyLocationRenderMode.NORMAL,
           ),
           Align(
@@ -99,6 +94,24 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
                   return Container();
                 }
               },
+            ),
+          ),
+          if (!isTrackingUser)
+            Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.background.withOpacity(0.78),
+                borderRadius: BorderRadius.circular(9),
+              ),
+              child: IconButton(
+                icon: Icon(Icons.my_location), 
+                onPressed: () {
+                  setState(() {
+                    isTrackingUser = true;
+                  });
+                }),
             ),
           ),
         ],

@@ -22,6 +22,7 @@ class Locator {
   }
 
   void stop() async {
+    if (!isActive) return;
     await _locatorSub.cancel();
     _locatorSub = null;
   }
