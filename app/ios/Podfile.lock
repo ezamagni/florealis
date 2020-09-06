@@ -1,10 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - "geolocator (5.3.2+1)":
-    - Flutter
-  - google_api_availability (2.0.4):
-    - Flutter
-  - location_permissions (3.0.0):
+  - "geolocator (6.0.0+3)":
     - Flutter
   - Mapbox-iOS-SDK (5.6.1):
     - MapboxMobileEvents (= 0.10.2)
@@ -19,8 +15,6 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - geolocator (from `.symlinks/plugins/geolocator/ios`)
-  - google_api_availability (from `.symlinks/plugins/google_api_availability/ios`)
-  - location_permissions (from `.symlinks/plugins/location_permissions/ios`)
   - mapbox_gl (from `.symlinks/plugins/mapbox_gl/ios`)
 
 SPEC REPOS:
@@ -34,23 +28,17 @@ EXTERNAL SOURCES:
     :path: Flutter
   geolocator:
     :path: ".symlinks/plugins/geolocator/ios"
-  google_api_availability:
-    :path: ".symlinks/plugins/google_api_availability/ios"
-  location_permissions:
-    :path: ".symlinks/plugins/location_permissions/ios"
   mapbox_gl:
     :path: ".symlinks/plugins/mapbox_gl/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  geolocator: cf6756488ea848b65c1854ecf4e599387a237efb
-  google_api_availability: 15fa42a8cd83c0a6738507ffe6e87096f12abcb8
-  location_permissions: 42abd62dcc866b92e06506772d2cc42d14be7bb0
+  geolocator: ba89529b110425143bd41707cc6853648df94b6a
   Mapbox-iOS-SDK: b31bd62a5dd5b7e688eab787acd3d093a122f4d6
   mapbox_gl: 48d261b93d7dfc2367c2f93b493ea8f43df5ba96
   MapboxAnnotationExtension: d66de5561562c9d940153c0135725e671407b781
   MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
 
-PODFILE CHECKSUM: 9521394d575414e48f98efa8acdd82cc22847425
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
 COCOAPODS: 1.9.3

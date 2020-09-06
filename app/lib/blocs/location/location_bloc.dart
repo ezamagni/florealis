@@ -7,11 +7,9 @@ import './bloc.dart';
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
   static const ACCURACY = LocationAccuracy.high;
 
-  final _locator = Geolocator();
   StreamSubscription<Position> _positionSub;
 
-  @override
-  LocationState get initialState => UnknownLocationState();
+  LocationBloc() : super(UnknownLocationState());
 
   @override
   Stream<LocationState> mapEventToState(LocationEvent event) async* {
@@ -20,12 +18,10 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       yield* _fetchSinglePosition();
     } else if (event is StartTrackPositionEvent) {
       await _positionSub?.cancel();
-      final positionStream = _locator.getPositionStream(
-        LocationOptions(accuracy: ACCURACY),
-        GeolocationPermission.locationWhenInUse,
+      final positionStream = getPositionStream(
+        desiredAccuracy: ACCURACY,
       ).asBroadcastStream();
-      this.
-      _positionSub = positionStream.listen(null);
+      this._positionSub = positionStream.listen(null);
       yield* positionStream.map((position) => KnownLocationState(
             GpsPoint(position.latitude, position.longitude),
           ));
@@ -37,14 +33,11 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
   Stream<LocationState> _fetchSinglePosition() async* {
     yield FetchingLocationState();
     try {
-      var position = await _locator.getLastKnownPosition(
-        desiredAccuracy: ACCURACY,
-        locationPermissionLevel: GeolocationPermission.locationWhenInUse,
-      );
+      var position = await getLastKnownPosition();
       if (position == null) {
-        position = await _locator.getCurrentPosition(
-            desiredAccuracy: ACCURACY,
-            locationPermissionLevel: GeolocationPermission.locationWhenInUse);
+        position = await getCurrentPosition(
+          desiredAccuracy: ACCURACY,
+        );
       }
       yield KnownLocationState(
         GpsPoint(position.latitude, position.longitude),

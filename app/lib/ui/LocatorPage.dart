@@ -50,7 +50,7 @@ class _LocatorPageState extends State<LocatorPage>
         padding: EdgeInsets.all(8),
         child: Center(
           child: BlocBuilder<LocationBloc, LocationState>(
-            bloc: _locationBloc,
+            cubit: _locationBloc,
             builder: (context, locationState) {
               if (locationState is ErrorLocationState) {
                 return Text('Impossibile recuperare la posizione corrente:\n${locationState.error.toString()}');

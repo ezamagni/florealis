@@ -5,8 +5,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:rxdart/subjects.dart';
 
 class Locator {
-  final _locator = Geolocator();
-
   StreamSubscription<GpsPoint> _locatorSub;
   final _positionSubject = BehaviorSubject<GpsPoint>();
   Stream<GpsPoint> get positionStream => _positionSubject.stream;
@@ -15,8 +13,7 @@ class Locator {
 
   void start() {
     if (isActive) return;
-    _locatorSub = _locator
-        .getPositionStream()
+    _locatorSub = getPositionStream()
         .map((p) => GpsPoint(p.latitude, p.longitude))
         .listen(_onPosition);
   }

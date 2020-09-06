@@ -1,23 +1,23 @@
 name: florealis
-description: A new Flutter project.
+description: Also called Bottanica, a simple and handy tool to visualize the central-european CFCE grid.
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   equatable: ^1.2.0
-  geolocator: ^5.3.2
-  flutter_bloc: ^4.0.0
+  geolocator: ^6.0.0
+  flutter_bloc: ^6.0.0
   rxdart: ^0.24.1
   
   mapbox_gl:
 
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
