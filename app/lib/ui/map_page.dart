@@ -109,18 +109,18 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
   }
 
   Widget _buildTopPanel(BuildContext context) {
-    return StreamBuilder<GpsPoint>(
-      stream: _locator.positionStream,
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: LocationPanel.location(snapshot.data),
-          );
-        } else {
-          return Container();
-        }
-      },
+    return SafeArea(
+      minimum: const EdgeInsets.only(top: 25),
+      child: StreamBuilder<GpsPoint>(
+        stream: _locator.positionStream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return LocationPanel.location(snapshot.data);
+          } else {
+            return Container();
+          }
+        },
+      ),
     );
   }
 
