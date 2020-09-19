@@ -22,8 +22,6 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>MGLMapboxAccessToken</key>
-	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Se a un&apos;app che ti posiziona in un reticolo geografico non dai permesso di accedere alla tua posizione corrente, mi spieghi che la installi a fare?</string>
 	<key>UILaunchStoryboardName</key>

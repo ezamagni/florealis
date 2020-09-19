@@ -1,6 +1,7 @@
 import 'package:florealis/models/gps_point.dart';
 import 'package:florealis/services/locator.dart';
 import 'package:florealis/ui/location_panel.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 
@@ -58,7 +59,28 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          MapboxMap(
+          _buildMap(context),
+          Align(
+            alignment: Alignment.topCenter,
+            child: _buildTopPanel(context),
+          ),
+          if (!isTrackingUser)
+            Align(
+              alignment: Alignment.topRight,
+              child: _buildTrackButton(context),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMap(BuildContext context) {
+    return FutureBuilder<String>(
+      future: rootBundle.loadString('assets/.mb_token', cache: true),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return MapboxMap(
+            accessToken: snapshot.data,
             onMapCreated: _onMapCreated,
             initialCameraPosition: _initialCameraPosition,
             styleString: MapPage.STYLE_URL,
@@ -70,49 +92,50 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
             },
             onCameraTrackingChanged: (trackingMode) {
               setState(() {
-                isTrackingUser = trackingMode == MyLocationTrackingMode.Tracking;
+                isTrackingUser =
+                    trackingMode == MyLocationTrackingMode.Tracking;
               });
             },
             myLocationTrackingMode: (isTrackingUser && mapController != null)
                 ? MyLocationTrackingMode.Tracking
                 : MyLocationTrackingMode.None,
             myLocationRenderMode: MyLocationRenderMode.NORMAL,
-          ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: StreamBuilder<GpsPoint>(
-              stream: _locator.positionStream,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: LocationPanel.location(snapshot.data),
-                  );
-                } else {
-                  return Container();
-                }
-              },
-            ),
-          ),
-          if (!isTrackingUser)
-            Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              margin: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background.withOpacity(0.78),
-                borderRadius: BorderRadius.circular(9),
-              ),
-              child: IconButton(
-                icon: Icon(Icons.my_location), 
-                onPressed: () {
-                  setState(() {
-                    isTrackingUser = true;
-                  });
-                }),
-            ),
-          ),
-        ],
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+
+  Widget _buildTopPanel(BuildContext context) {
+    return StreamBuilder<GpsPoint>(
+      stream: _locator.positionStream,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: LocationPanel.location(snapshot.data),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
+
+  Widget _buildTrackButton(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.background.withOpacity(0.78),
+        borderRadius: BorderRadius.circular(9),
+      ),
+      child: IconButton(
+        icon: Icon(Icons.my_location),
+        onPressed: () => setState(() {
+          isTrackingUser = true;
+        }),
       ),
     );
   }

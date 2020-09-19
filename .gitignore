@@ -1,5 +1,6 @@
 # Miscellaneous
 .mapbox
+.mb_token
 *.class
 *.log
 *.pyc
