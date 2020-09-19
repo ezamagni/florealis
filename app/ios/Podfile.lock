@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - "geolocator (6.0.0+3)":
+  - "geolocator (6.0.0+4)":
     - Flutter
   - Mapbox-iOS-SDK (5.6.1):
     - MapboxMobileEvents (= 0.10.2)
@@ -33,7 +33,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  geolocator: ba89529b110425143bd41707cc6853648df94b6a
+  geolocator: 1ae40084cc6c1586ce5ad12cfc3fd38c64d05f2f
   Mapbox-iOS-SDK: b31bd62a5dd5b7e688eab787acd3d093a122f4d6
   mapbox_gl: 48d261b93d7dfc2367c2f93b493ea8f43df5ba96
   MapboxAnnotationExtension: d66de5561562c9d940153c0135725e671407b781

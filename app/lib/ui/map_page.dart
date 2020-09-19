@@ -65,10 +65,8 @@ class _MapPageState extends State<MapPage> with WidgetsBindingObserver {
             rotateGesturesEnabled: false,
             tiltGesturesEnabled: false,
             myLocationEnabled: true,
-            onMapClick: (_, __) {
-              setState(() {
-                isTrackingUser = !isTrackingUser;
-              });
+            onMapClick: (d, latlon) {
+              debugPrint("$d, $latlon");
             },
             onCameraTrackingChanged: (trackingMode) {
               setState(() {
