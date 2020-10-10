@@ -1,7 +1,7 @@
 name: florealis
 description: Also called Bottanica, a simple and handy tool to visualize the central-european CFCE grid.
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: ">=2.8.0 <3.0.0"
@@ -23,10 +23,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_launcher_icons: ^0.7.5
+  flutter_launcher_icons: ^0.8.1
 
 flutter_icons:
-  android: true
+  android: 'launcher_icon'
   ios: true
   image_path: 'assets/images/appicon.png'
 
