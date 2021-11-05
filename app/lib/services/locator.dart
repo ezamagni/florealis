@@ -13,7 +13,7 @@ class Locator {
 
   void start() {
     if (isActive) return;
-    _locatorSub = getPositionStream()
+    _locatorSub = Geolocator.getPositionStream()
         .map((p) => GpsPoint(p.latitude, p.longitude))
         .listen(_onPosition);
   }

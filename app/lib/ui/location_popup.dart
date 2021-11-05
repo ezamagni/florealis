@@ -20,7 +20,12 @@ class LocationPopup extends StatelessWidget {
     Function onDismiss,
   }) {
     final cfceLocation = CfcePoint.from(location);
-    return LocationPopup(location, cfceLocation, onDismiss: onDismiss, key: key);
+    return LocationPopup(
+      location,
+      cfceLocation,
+      onDismiss: onDismiss,
+      key: key,
+    );
   }
 
   @override
@@ -64,7 +69,7 @@ class LocationPopup extends StatelessWidget {
                           style: Theme.of(context).textTheme.caption.apply(
                                 fontFamily: 'UbuntuMono',
                               ),
-                        )
+                        ),
                       ],
                     );
                   },
@@ -76,23 +81,21 @@ class LocationPopup extends StatelessWidget {
         Positioned(
           top: -12,
           left: -12,
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-              border: Border.all(
-                color: Colors.black,
-                width: 1.6,
+          child: GestureDetector(
+            onTap: onDismiss,
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1.6,
+                ),
               ),
-            ),
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              constraints: BoxConstraints.tight(Size.square(28)),
-              icon: Icon(
+              child: Icon(
                 Icons.close,
                 color: Colors.black,
               ),
-              onPressed: onDismiss,
             ),
           ),
         ),
